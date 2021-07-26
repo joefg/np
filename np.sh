@@ -24,23 +24,23 @@ usage(){
 main() {
 	case $1 in
 		'edit' | 'e')
-				edit
-				;;
+			edit
+			;;
 		'publish' | 'p')
-				publish
-				;;
-			*)
-				usage
-				;;
+			publish
+			;;
+		*)
+			usage
+			;;
 	esac
 }
 
 edit() {
-	$EDITOR ~/.notepad.md
+	$EDITOR ~/.notepad/notepad.md
 }
 
 publish() {
-	pandoc ~/.notepad.md -o notepad.pdf
+	pandoc ~/.notepad/notepad.md -o notepad.pdf
 }
 
 main "$@"
