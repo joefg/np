@@ -12,9 +12,11 @@ Usage:
 
 ## Installation
 
-This is a very simple shell script, so you should install it somewhere your shell can see it.
+A `Makefile` is provided.
 
-I used `cp np /usr/local/bin/np`, which works for Arch, but your actual location may be different. As a rule of thumb, you will want to keep it in your `$PATH`. To see where that is, you should run `echo $PATH` to get a list of the path directories available to your shell.
+`make install`
+
+Manually copying `np` to `~/.local/bin/np` also works. This is the preferred option for installing `np` for the current user only.
 
 ## Dependencies
 
