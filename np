@@ -1,21 +1,19 @@
 #!/usr/bin/env sh
 
-#                                    /$$
-#                                   | $$
-#  /$$$$$$$   /$$$$$$       /$$$$$$$| $$$$$$$ 
-# | $$__  $$ /$$__  $$     /$$_____/| $$__  $$
-# | $$  \ $$| $$  \ $$    |  $$$$$$ | $$  \ $$
-# | $$  | $$| $$  | $$     \____  $$| $$  | $$
-# | $$  | $$| $$$$$$$/ /$$ /$$$$$$$/| $$  | $$
-# |__/  |__/| $$____/ |__/|_______/ |__/  |__/
+#  /$$$$$$$   /$$$$$$
+# | $$__  $$ /$$__  $$
+# | $$  \ $$| $$  \ $$
+# | $$  | $$| $$  | $$
+# | $$  | $$| $$$$$$$/
+# |__/  |__/| $$____/
 #           | $$
 #           | $$
 #           |__/ 
 #
-# np.sh - a very simple notepad for unix users
+# np - a very simple notepad for unix users
 
 usage(){
-	echo "np.sh - a very simple notepad for unix users";
+	echo "np - a very simple notepad for unix users";
 	echo "Usage:";
 	echo "  edit, e    :  opens today's notepad";
 	echo "  publish, p :  publishes entire series as pdf";

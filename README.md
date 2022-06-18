@@ -1,9 +1,9 @@
-# np.sh
+# np
 
 A very simple notepad for unix users.
 
 ```
-np.sh - a very simple notepad for unix users
+np - a very simple notepad for unix users
 Usage:
   edit, e    :  opens today's notepad
   publish, p :  publishes entire series as pdf
@@ -14,7 +14,7 @@ Usage:
 
 This is a very simple shell script, so you should install it somewhere your shell can see it.
 
-I used `cp np.sh /usr/local/bin/np`, which works for Arch, but your actual location may be different. As a rule of thumb, you will want to keep it in your `$PATH`. To see where that is, you should run `echo $PATH` to get a list of the path directories available to your shell.
+I used `cp np /usr/local/bin/np`, which works for Arch, but your actual location may be different. As a rule of thumb, you will want to keep it in your `$PATH`. To see where that is, you should run `echo $PATH` to get a list of the path directories available to your shell.
 
 ## Dependencies
 
