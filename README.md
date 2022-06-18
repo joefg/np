@@ -7,7 +7,7 @@ np - a very simple notepad for unix users
 Usage:
   edit, e    :  opens today's notepad
   publish, p :  publishes entire series as pdf
-  list, ls   : lists all notepads;
+  list, ls   :  lists all notepads
 ```
 
 ## Installation

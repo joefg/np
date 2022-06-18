@@ -17,7 +17,7 @@ usage(){
 	echo "Usage:";
 	echo "  edit, e    :  opens today's notepad";
 	echo "  publish, p :  publishes entire series as pdf";
-	echo "  list, ls   : lists all notepads;"
+	echo "  list, ls   :  lists all notepads";
 }
 
 main() {
