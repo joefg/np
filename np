@@ -11,16 +11,50 @@
 #           |__/ 
 #
 # np - a very simple notepad for unix users
+#
+# configuration: add this to your .profile
+# export NP_NOTEPAD_LOCATION=$HOME/your_dir
+# export NP_AUTHOR_NAME="Your Name Here";
+# export NP_NOTEPAD_NAME="Notepad";
 
 usage(){
 	echo "np - a very simple notepad for unix users";
 	echo "Usage:";
-	echo "  edit, e    :  opens today's notepad";
-	echo "  publish, p :  publishes entire series as pdf";
-	echo "  list, ls   :  lists all notepads";
+	echo "  edit,     e :  opens today's notepad";
+	echo "  publish,  p :  publishes entire series as pdf";
+	echo "  list,    ls :  lists all notepads";
+	echo "  config,  rc :  print your config";
+}
+
+get_config(){
+	if [[ -z "${NP_NOTEPAD_LOCATION}" ]]; then
+		NOTEPAD_LOCATION="~/.notepad";
+	else
+		NOTEPAD_LOCATION="${NP_NOTEPAD_LOCATION}"
+	fi;
+
+	if [[ -z "${NP_AUTHOR_NAME}" ]]; then
+		AUTHOR_NAME=$(whoami);
+	else
+		AUTHOR_NAME="${NP_AUTHOR_NAME}"
+	fi;
+
+	if [[ -z "${NP_NOTEPAD_NAME}" ]]; then
+		NOTEPAD_NAME="Notepad";
+	else
+		NOTEPAD_NAME="${NP_NOTEPAD_NAME}"
+	fi;
+}
+
+print_config(){
+	echo "Notepad location: $NOTEPAD_LOCATION";
+	echo "Author name:      $AUTHOR_NAME";
+	echo "Notepad name:     $NOTEPAD_NAME";
 }
 
 main() {
+	get_config;
+
 	case $1 in
 		'edit' | 'e')
 			edit
@@ -31,6 +65,9 @@ main() {
 		'list' | 'ls' )
 			list
 			;;
+		'config' | 'rc' )
+			print_config
+			;;
 		*)
 			usage
 			;;
@@ -38,30 +75,29 @@ main() {
 }
 
 edit() {
-	if [ ! -d ~/.notepad ]; then
-		mkdir -p ~/.notepad;
+	if [ ! -d $NOTEPAD_LOCATION ]; then
+		mkdir -p $NOTEPAD_LOCATION;
 	fi;
 
-	if [ ! -f ~/.notepad/$(date -I).md ]; then
-		cat << EOF > ~/.notepad/$(date -I).md
+	if [ ! -f $NOTEPAD_LOCATION/$(date -I).md ]; then
+		cat << EOF > $NOTEPAD_LOCATION/$(date -I).md
 # $(date +"%A %d %B, %Y")
 
 ---
 EOF
 	fi;
 
-	$EDITOR ~/.notepad/$(date -I).md;
+	$EDITOR $NOTEPAD_LOCATION/$(date -I).md;
 }
 
 publish() {
-	mkdir -p ~/.notepad/generated;
-
-	cat << EOF > ~/.notepad/generated/front.md
+	mkdir -p $NOTEPAD_LOCATION/generated;
+	cat << EOF > $NOTEPAD_LOCATION/generated/front.md
 ---
 title:
-- "Notepad"
+- "${NOTEPAD_NAME}"
 author:
-- $(whoami)
+- "${AUTHOR_NAME}"
 fontsize:
 - 12pt
 papersize:
@@ -83,7 +119,7 @@ geometry:
 
 This is a notepad built by [np](https://github.com/joefg/np), generated on $(date +"%A %d %B, %Y").
 
-It is comprised of entries found inside the author's \`~/.notepad\` directory.
+It is comprised of entries found inside the author's \`$NOTEPAD_LOCATION\` directory.
 
 ---
 
@@ -96,16 +132,16 @@ EOF
 	then
 		echo "Pandoc is not installed on this system.";
 	else
-		pandoc ~/.notepad/generated/front.md \
-			$(find ~/.notepad -name "*.md" -not -path "*/generated/*") \
-			-o ~/.notepad/generated/notepad.pdf;
+		pandoc $NOTEPAD_LOCATION/generated/front.md \
+			$(find $NOTEPAD_LOCATION -name "*.md" -not -path "*/generated/*") \
+			-o $NOTEPAD_LOCATION/generated/notepad.pdf;
 
-		echo "PDF generated at ~/.notepad/generated/notepad.pdf";
+		echo "PDF generated at $NOTEPAD_LOCATION/generated/notepad.pdf";
 	fi
 }
 
 list() {
-	find ~/.notepad -name "*.md" -not -path "*/generated/*";
+	find $NOTEPAD_LOCATION -name "*.md" -not -path "*/generated/*";
 }
 
 main "$@"
