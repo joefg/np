@@ -79,15 +79,15 @@ edit() {
 		mkdir -p $NOTEPAD_LOCATION;
 	fi;
 
-	if [ ! -f $NOTEPAD_LOCATION/$(date -I).md ]; then
-		cat << EOF > $NOTEPAD_LOCATION/$(date -I).md
+	if [ ! -f $NOTEPAD_LOCATION/$(date +'%y%m%d').md ]; then
+		cat << EOF > $NOTEPAD_LOCATION/$(date +'%y%m%d').md
 # $(date +"%A %d %B, %Y")
 
 ---
 EOF
 	fi;
 
-	$EDITOR $NOTEPAD_LOCATION/$(date -I).md;
+	$EDITOR $NOTEPAD_LOCATION/$(date +'%y%m%d').md;
 }
 
 publish() {
@@ -133,7 +133,7 @@ EOF
 		echo "Pandoc is not installed on this system.";
 	else
 		pandoc $NOTEPAD_LOCATION/generated/front.md \
-			$(find $NOTEPAD_LOCATION -name "*.md" -not -path "*/generated/*") \
+			$(list) \
 			-o $NOTEPAD_LOCATION/generated/notepad.pdf;
 
 		echo "PDF generated at $NOTEPAD_LOCATION/generated/notepad.pdf";
@@ -141,7 +141,8 @@ EOF
 }
 
 list() {
-	find $NOTEPAD_LOCATION -name "*.md" -not -path "*/generated/*";
+	find $NOTEPAD_LOCATION -type f -name "*.md" -not -path "*/generated/*" \
+		-exec ls -1 "{}" +;
 }
 
 main "$@"
