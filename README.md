@@ -53,6 +53,8 @@ export NP_NOTEPAD_NAME="Project Notepad For $PWD";
 ```
 Run this script, and `np` will use a notepad with these settings. You will need to run this helper script every time you open a new shell in this directory, and once you have left the project directory you will have to source your original configurations, either by running `source ~/.profile` or by simply closing and opening the shell again.
 
+It is also possible to have a drafts folder. Just add things to `$NP_NOTEPAD_LOCATION_HOME/drafts`.
+
 ## Dependencies
 
 This uses vanilla POSIX `sh`, so it should work on most platforms. The only dependency is on `pandoc`, and even then that is optional. Pandoc support for PDF requires TeXLive, which is in most Linux distribution repositories.
