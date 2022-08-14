@@ -141,7 +141,7 @@ EOF
 }
 
 list() {
-	find $NOTEPAD_LOCATION -type f -name "*.md" -not -path "*/generated/*" \
+	find $NOTEPAD_LOCATION -type f -name "*.md" -not -path "*/generated/*" -not -path "*/drafts/*" \
 		-exec ls -1 "{}" +;
 }
 
