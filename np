@@ -132,6 +132,7 @@ EOF
 	then
 		echo "Pandoc is not installed on this system.";
 	else
+    cd $NOTEPAD_LOCATION
 		pandoc $NOTEPAD_LOCATION/generated/front.md \
 			$(list) \
 			-o $NOTEPAD_LOCATION/generated/notepad.pdf;
